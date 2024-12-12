@@ -1,0 +1,49 @@
+.input {
+	background-color: transparent;
+	border: none;
+	font: inherit;
+	font-family: inherit;
+	outline: none;
+	padding-block: 0.5rem;
+	flex: 1;
+	min-width: 0;
+}
+
+.container {
+	background-color: #ededed;
+	border: 1px solid #ccc;
+	border-radius: 0.5rem;
+	padding-inline: 0.5em;
+	display: flex;
+	gap: 0.5rem;
+	padding-block: 0.25rem;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.container:focus-within {
+	outline: auto 5px -webkit-focus-ring-color;
+}
+
+.tag {
+	background-color: #f9f9f9;
+	border: 1px solid #bcbcbc;
+	padding-inline: 0.5rem;
+	padding-block: 0.25rem;
+	border-radius: 0.25em;
+	display: inline-flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.removeButton {
+	appearance: none;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
