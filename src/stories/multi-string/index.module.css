@@ -16,13 +16,13 @@
 	padding-inline: 0.5em;
 	display: flex;
 	gap: 0.5rem;
-	padding-block: 0.25rem;
+	height: 2.25em;
 	flex-wrap: wrap;
 	align-items: center;
 }
 
 .container:focus-within {
-	outline: auto 5px -webkit-focus-ring-color;
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3795fa;
 }
 
 .tag {
