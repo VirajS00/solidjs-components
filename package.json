@@ -8,7 +8,8 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
-		"solid-js": "^1.9.1"
+		"solid-js": "^1.9.3",
+		"terracotta": "^1.0.6"
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^1.9.0",
@@ -23,6 +24,7 @@
 		"storybook-solidjs-vite": "^1.0.0-beta.2",
 		"typescript": "^5.5.3",
 		"vite": "^5.4.8",
-		"vite-plugin-solid": "^2.10.2"
+		"vite-plugin-solid": "^2.10.2",
+		"@storybook/builder-vite": "^8.3.5"
 	}
 }
