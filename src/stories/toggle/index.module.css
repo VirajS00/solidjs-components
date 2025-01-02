@@ -16,7 +16,13 @@
 	background-color: #eee;
 	height: 1.25em;
 	width: 2.5em;
-	transition: background-color 75ms ease;
+	transition: background-color 75ms ease, box-shadow 75ms ease;
+}
+
+@media (prefers-reduced-motion) {
+	.switchLabel {
+		transition: none;
+	}
 }
 
 .switchIndicator {

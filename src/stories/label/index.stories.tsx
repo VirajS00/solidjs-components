@@ -1,18 +1,20 @@
 import type { Meta, StoryObj } from "storybook-solidjs";
-import { Toggle } from ".";
-import { Label } from "../label";
+
+import { Label } from ".";
+import { Input } from "../input";
 
 const ExampleStory = () => {
 	return (
-		<form style={{ display: "flex", gap: "0.5em" }}>
-			<Toggle name='name' id='input-example' />
-			<Label for='input-example'>Enabled</Label>
+		<form
+			style={{ display: "flex", "flex-direction": "column", gap: "0.25em" }}>
+			<Label for='input-example'>Name</Label>
+			<Input name='name' id='input-example' />
 		</form>
 	);
 };
 
 const meta = {
-	title: "Example/Toggle",
+	title: "Example/Label",
 	component: ExampleStory,
 	argTypes: {},
 	args: {},

@@ -18,7 +18,13 @@
 	border-radius: 0.25em;
 	color: #fff;
 	cursor: pointer;
-	transition: background-color 75ms ease;
+	transition: background-color 75ms ease, box-shadow 75ms ease;
+}
+
+@media (prefers-reduced-motion) {
+	.checkboxIcon {
+		transition: none;
+	}
 }
 
 .checkboxLabel:hover,

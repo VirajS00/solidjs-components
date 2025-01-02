@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "storybook-solidjs";
 
 import { MultiString } from ".";
 import { createSignal, type JSX } from "solid-js";
+import { Label } from "../label";
 
 const ExampleStory = () => {
 	const [vals, setVals] = createSignal<object | undefined>(undefined);
@@ -28,7 +29,15 @@ const ExampleStory = () => {
 	return (
 		<>
 			<form onSubmit={submitForm}>
-				<MultiString name='hello' />
+				<div
+					style={{
+						display: "flex",
+						"flex-direction": "column",
+						gap: "0.25em",
+					}}>
+					<Label for='hello'>Values</Label>
+					<MultiString name='hello' id='hello' />
+				</div>
 				<button type='submit'>submit</button>
 			</form>
 			<div>{JSON.stringify(vals(), undefined, 2)}</div>

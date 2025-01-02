@@ -1,13 +1,25 @@
-import { createSignal, For, type JSX, type Component, Show } from "solid-js";
+import {
+	createSignal,
+	For,
+	type JSX,
+	type Component,
+	Show,
+	splitProps,
+} from "solid-js";
 import styles from "./index.module.css";
 import { IconClose } from "../../icons/icon-close";
 
-export type MultiStringProps = JSX.HTMLAttributes<HTMLInputElement> & {
+export type MultiStringProps = Omit<
+	JSX.HTMLAttributes<HTMLInputElement>,
+	"value"
+> & {
 	name?: string;
+	value?: string[];
 };
 
 export const MultiString: Component<MultiStringProps> = (props) => {
-	const [val, setVal] = createSignal<string[]>([]);
+	const [local, rest] = splitProps(props, ["id", "value"]);
+	const [val, setVal] = createSignal<string[]>(local.value ?? []);
 	const [showTags, setShowTag] = createSignal(false);
 
 	const handleKeyDown: JSX.EventHandlerUnion<
@@ -73,9 +85,10 @@ export const MultiString: Component<MultiStringProps> = (props) => {
 					placeholder='Enter value'
 					onInput={handleOnInput}
 					onKeyDown={handleKeyDown}
+					id={local.id}
 				/>
 			</div>
-			<input type='hidden' data-type='array' value={val()} {...props} />
+			<input type='hidden' data-type='array' value={val()} {...rest} />
 		</>
 	);
 };

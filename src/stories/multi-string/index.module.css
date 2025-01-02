@@ -10,7 +10,7 @@
 }
 
 .container {
-	background-color: #ededed;
+	background-color: #f8f8f8;
 	border: 1px solid #ccc;
 	border-radius: 0.5rem;
 	padding-inline: 0.5em;
@@ -19,6 +19,13 @@
 	height: 2.25em;
 	flex-wrap: wrap;
 	align-items: center;
+	transition: box-shadow 75ms ease;
+}
+
+@media (prefers-reduced-motion) {
+	.container {
+		transition: none;
+	}
 }
 
 .container:focus-within {

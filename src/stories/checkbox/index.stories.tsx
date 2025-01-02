@@ -1,13 +1,14 @@
 import type { Meta, StoryObj } from "storybook-solidjs";
 import { Checkbox } from ".";
+import { Label } from "../label";
 
 const ExampleStory = () => {
 	return (
 		<div>
 			<Checkbox id='my-checkbox' value='item-1' />
-			<label for='my-checkbox' style={{ "padding-left": "0.5em" }}>
+			<Label for='my-checkbox' style={{ "padding-left": "0.5em" }}>
 				Item 1
-			</label>
+			</Label>
 		</div>
 	);
 };
