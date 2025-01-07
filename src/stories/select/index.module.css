@@ -94,11 +94,15 @@
 }
 
 .listboxItem:focus {
-	background-color: #e8f3ff;
+	background-color: rgba(232, 243, 255, 0.713);
 	color: #3795fa;
 }
 
 .listboxItem[aria-selected="true"] {
 	background-color: #e8f3ff;
 	color: #3795fa;
+}
+
+.placeholder {
+	color: #949494;
 }
