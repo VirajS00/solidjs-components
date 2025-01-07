@@ -9,6 +9,10 @@
 	min-width: 0;
 }
 
+.input::placeholder {
+	color: #949494;
+}
+
 .container {
 	background-color: #f8f8f8;
 	border: 1px solid #ccc;

@@ -7,7 +7,7 @@ const ExampleStory = () => {
 		<form
 			style={{ display: "flex", "flex-direction": "column", gap: "0.25em" }}>
 			<label for='input-example'>Name</label>
-			<Input name='name' id='input-example' />
+			<Input name='name' id='input-example' placeholder='Enter Name' />
 		</form>
 	);
 };

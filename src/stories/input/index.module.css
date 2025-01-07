@@ -2,11 +2,16 @@
 	background-color: #f8f8f8;
 	border: 1px solid #ccc;
 	border-radius: 0.5rem;
+	font: inherit;
 	padding-inline: 0.5em;
 	height: 2.25em;
 	outline: none;
 	font-size: 1em;
 	transition: box-shadow 75ms ease;
+}
+
+input::placeholder {
+	color: #949494;
 }
 
 @media (prefers-reduced-motion) {
