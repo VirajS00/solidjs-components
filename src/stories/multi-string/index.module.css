@@ -32,19 +32,20 @@
 	}
 }
 
-.container:focus-within {
+.container:has(input:focus) {
 	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3795fa;
 }
 
 .tag {
-	background-color: #f9f9f9;
-	border: 1px solid #bcbcbc;
-	padding-inline: 0.5rem;
-	padding-block: 0.25rem;
+	padding-inline: 0.5em;
+	padding-block: 0.25em;
+	background-color: #ffffff;
+	border: 1px solid #ccc;
+	font-size: 0.875rem;
 	border-radius: 0.25em;
 	display: inline-flex;
-	gap: 0.5rem;
 	align-items: center;
+	gap: 0.375em;
 }
 
 .removeButton {

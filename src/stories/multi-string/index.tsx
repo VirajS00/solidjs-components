@@ -5,6 +5,7 @@ import {
 	type Component,
 	Show,
 	splitProps,
+	onMount,
 } from "solid-js";
 import styles from "./index.module.css";
 import { IconClose } from "../../icons/icon-close";
@@ -18,9 +19,34 @@ export type MultiStringProps = Omit<
 };
 
 export const MultiString: Component<MultiStringProps> = (props) => {
-	const [local, rest] = splitProps(props, ["id", "value"]);
-	const [val, setVal] = createSignal<string[]>(local.value ?? []);
+	const [local, rest] = splitProps(props, ["id", "value", "ref"]);
+	const [val, setVal] = createSignal<string[]>([]);
 	const [showTags, setShowTag] = createSignal(false);
+
+	let inputRef: HTMLInputElement | undefined;
+
+	onMount(() => {
+		if (!inputRef) {
+			return;
+		}
+
+		if (inputRef.defaultValue) {
+			setShowTag(true);
+			setVal(inputRef.defaultValue.split(","));
+		} else if (local.value) {
+			setShowTag(true);
+			setVal(local.value);
+		}
+
+		const form = inputRef.closest("form");
+
+		if (form && inputRef.defaultValue) {
+			form.addEventListener("reset", () => {
+				setVal(inputRef?.defaultValue.split(",") ?? []);
+				setShowTag(true);
+			});
+		}
+	});
 
 	const handleKeyDown: JSX.EventHandlerUnion<
 		HTMLInputElement,
@@ -88,7 +114,23 @@ export const MultiString: Component<MultiStringProps> = (props) => {
 					id={local.id}
 				/>
 			</div>
-			<input type='hidden' data-type='array' value={val()} {...rest} />
+			<input
+				type='text'
+				data-type='array'
+				aria-hidden='true'
+				style={{ display: "none" }}
+				ref={(node) => {
+					if (typeof local.ref === "function") {
+						local.ref(node);
+					} else {
+						local.ref = node;
+					}
+
+					inputRef = node;
+				}}
+				value={val()}
+				{...rest}
+			/>
 		</>
 	);
 };

@@ -1,47 +1,35 @@
 import type { Meta, StoryObj } from "storybook-solidjs";
 
 import { MultiString } from ".";
-import { createSignal, type JSX } from "solid-js";
 import { Label } from "../label";
+import { onMount } from "solid-js";
+
+const defaultVals = ["hello", "one", "two"];
 
 const ExampleStory = () => {
-	const [vals, setVals] = createSignal<object | undefined>(undefined);
+	let inputRef: HTMLInputElement | undefined;
 
-	const submitForm: JSX.EventHandlerUnion<HTMLFormElement, SubmitEvent> = (
-		e
-	) => {
-		e.preventDefault();
-		const formData: Record<string, unknown> = Object.fromEntries(
-			new FormData(e.currentTarget)
-		);
-		const arrayInps: NodeListOf<HTMLInputElement> =
-			e.currentTarget.querySelectorAll('[data-type="array"][name]');
-
-		if (arrayInps) {
-			for (const arrInp of arrayInps) {
-				formData[arrInp.name as string] = arrInp.value.split(",");
-			}
+	onMount(() => {
+		if (!inputRef) {
+			return;
 		}
 
-		setVals(formData);
-	};
+		inputRef.defaultValue = defaultVals.toString();
+	});
 
 	return (
-		<>
-			<form onSubmit={submitForm}>
-				<div
-					style={{
-						display: "flex",
-						"flex-direction": "column",
-						gap: "0.25em",
-					}}>
-					<Label for='hello'>Values</Label>
-					<MultiString name='hello' id='hello' />
-				</div>
-				<button type='submit'>submit</button>
-			</form>
-			<div>{JSON.stringify(vals(), undefined, 2)}</div>
-		</>
+		<form>
+			<div
+				style={{
+					display: "flex",
+					"flex-direction": "column",
+					gap: "0.25em",
+				}}>
+				<Label for='hello'>Values</Label>
+				<MultiString name='hello' id='hello' ref={inputRef} />
+			</div>
+			<button type='reset'>reset</button>
+		</form>
 	);
 };
 
