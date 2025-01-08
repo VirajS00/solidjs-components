@@ -2,16 +2,13 @@
 	position: relative;
 }
 
-.select {
-	display: none;
-}
-
 .triggerButton {
 	position: relative;
 	width: 100%;
 	padding-block: 0.5rem;
 	padding-inline-start: 0.75rem;
 	padding-inline-end: 2.5rem;
+	height: 2.25rem;
 	background-color: #f8f8f8;
 	border: 1px solid #ccc;
 	text-align: left;
@@ -75,6 +72,8 @@
 
 .triggerIconContainer {
 	position: absolute;
+	display: flex;
+	align-items: center;
 	top: 50%;
 	right: 0.75rem;
 	transform: translateY(-50%);

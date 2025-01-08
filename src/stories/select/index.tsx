@@ -129,6 +129,7 @@ export const Select: Component<Props> = (props) => {
 				aria-hidden
 				class={styles.select}
 				value={selected()}
+				style={{ display: "none" }}
 				onChange={(e) => {
 					setSelected(e.target.value);
 				}}
