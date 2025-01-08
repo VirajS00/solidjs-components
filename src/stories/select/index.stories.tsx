@@ -10,16 +10,13 @@ const fruits: SelectOption[] = [
 ];
 
 const ExampleStory = () => {
-	let selectRef: HTMLSelectElement | undefined;
+	let selectRef: HTMLInputElement | undefined;
 	onMount(() => {
-		const options = selectRef?.querySelectorAll("option");
-		if (options) {
-			const val = [...options].find((x) => x.value === "grape");
-
-			if (val) {
-				val.defaultSelected = true;
-			}
+		if (!selectRef) {
+			return;
 		}
+
+		selectRef.defaultValue = "grape";
 	});
 
 	return (

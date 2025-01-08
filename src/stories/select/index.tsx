@@ -25,7 +25,7 @@ export type SelectOption = {
 	value: string;
 };
 
-type Props = JSX.HTMLAttributes<HTMLSelectElement> & {
+type Props = JSX.HTMLAttributes<HTMLInputElement> & {
 	options: SelectOption[];
 	value?: string;
 	name?: string;
@@ -40,25 +40,19 @@ export const Select: Component<Props> = (props) => {
 		"ref",
 	]);
 	const [selected, setSelected] = createSignal(local.value);
-	let selectRef: HTMLSelectElement | undefined;
+	let inputRef: HTMLInputElement | undefined;
 
 	onMount(() => {
-		const form = selectRef?.closest("form");
-		const options = selectRef?.querySelectorAll("option");
+		const form = inputRef?.closest("form");
 
-		if (!options || !form) {
+		if (!form) {
 			return;
 		}
 
-		for (const option of options) {
-			if (option.defaultSelected) {
-				setSelected(option.value);
-			}
-		}
+		setSelected(inputRef?.defaultValue);
 
 		form?.addEventListener("reset", () => {
-			const defaultValue = [...options]?.find((x) => x.defaultSelected)?.value;
-			setSelected(defaultValue);
+			setSelected(inputRef?.defaultValue);
 		});
 	});
 
@@ -124,14 +118,17 @@ export const Select: Component<Props> = (props) => {
 					</DisclosureStateChild>
 				</div>
 			</Listbox>
-			<select
-				tabIndex={-1}
-				aria-hidden
-				class={styles.select}
+			<input
+				type='text'
+				aria-hidden='true'
 				value={selected()}
 				style={{ display: "none" }}
-				onChange={(e) => {
+				onInput={(e) => {
 					setSelected(e.target.value);
+
+					if (rest.onInput && typeof rest.onInput === "function") {
+						rest.onInput(e);
+					}
 				}}
 				ref={(node) => {
 					if (typeof local.ref === "function") {
@@ -140,20 +137,10 @@ export const Select: Component<Props> = (props) => {
 						local.ref = node;
 					}
 
-					selectRef = node;
+					inputRef = node;
 				}}
-				{...rest}>
-				<option selected={selectedVal()?.value === undefined} value='' />
-				<For each={local.options}>
-					{(option) => (
-						<option
-							selected={selectedVal()?.value === option.value}
-							value={option.value}>
-							{option.value}
-						</option>
-					)}
-				</For>
-			</select>
+				{...rest}
+			/>
 		</>
 	);
 };
