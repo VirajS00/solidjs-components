@@ -85,22 +85,30 @@ export const MultipleExample: Component<Props> = (props) => {
 									</span>
 								}>
 								{(item): JSX.Element => (
-									<span
-										class={styles.tag}
-										onClick={(e) => {
-											e.stopPropagation();
-											e.stopImmediatePropagation();
-										}}>
+									<span class={styles.tag}>
 										<span>{item.label}</span>
 										<span
 											tabIndex={0}
+											aria-label={`remove ${item.label}`}
 											class={styles.removeItemBtn}
-											onClick={(e) => {
+											onMouseUp={(e) => {
+												e.preventDefault();
 												e.stopPropagation();
 												e.stopImmediatePropagation();
+
 												let items = selected();
 												items = items.filter((x) => x.value !== item.value);
 												setSelected(items);
+											}}
+											onKeyDown={(e) => {
+												e.stopPropagation();
+												e.stopImmediatePropagation();
+
+												if (e.code === "Enter" || e.code === "Space") {
+													let items = selected();
+													items = items.filter((x) => x.value !== item.value);
+													setSelected(items);
+												}
 											}}>
 											<IconClose size={12} />
 										</span>
@@ -115,6 +123,7 @@ export const MultipleExample: Component<Props> = (props) => {
 					<DisclosureStateChild>
 						{({ isOpen }): JSX.Element => (
 							<Transition
+								unmount
 								show={isOpen()}
 								enter={styles.transitionEnter}
 								enterFrom={styles.transitionEnterFrom}
