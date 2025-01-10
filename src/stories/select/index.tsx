@@ -102,11 +102,11 @@ export const Select: Component<Props> = (props) => {
 												{({ isSelected }): JSX.Element => (
 													<>
 														<span>{person.label}</span>
-														{isSelected() ? (
+														<Show when={isSelected()}>
 															<span>
 																<IconCheckmark size={16} aria-hidden='true' />
 															</span>
-														) : null}
+														</Show>
 													</>
 												)}
 											</ListboxOption>

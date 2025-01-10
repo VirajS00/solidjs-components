@@ -1,5 +1,5 @@
 import type { Component, JSX } from "solid-js";
-import { For, createSignal, onMount, splitProps } from "solid-js";
+import { For, Show, createSignal, onMount, splitProps } from "solid-js";
 import {
 	DisclosureStateChild,
 	Listbox,
@@ -139,11 +139,11 @@ export const MultipleExample: Component<Props> = (props) => {
 												{({ isSelected }): JSX.Element => (
 													<>
 														<span>{person.label}</span>
-														{isSelected() ? (
+														<Show when={isSelected()}>
 															<span>
 																<IconCheckmark size={16} aria-hidden='true' />
 															</span>
-														) : null}
+														</Show>
 													</>
 												)}
 											</ListboxOption>
