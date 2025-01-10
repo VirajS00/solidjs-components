@@ -115,6 +115,7 @@ export const MultiString: Component<MultiStringProps> = (props) => {
 				/>
 			</div>
 			<input
+				tabIndex={-1}
 				type='text'
 				data-type='array'
 				aria-hidden='true'

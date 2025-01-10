@@ -38,7 +38,7 @@ export const MultipleExample: Component<Props> = (props) => {
 	onMount(() => {
 		if (local.value && local.value.length > 0) {
 			setSelected(local.options.filter((x) => local.value?.includes(x.value)));
-		} else if (inputRef && inputRef.defaultValue) {
+		} else if (inputRef?.defaultValue) {
 			setSelected(
 				local.options.filter((x) =>
 					inputRef?.defaultValue.split(",").includes(x.value)
@@ -88,6 +88,7 @@ export const MultipleExample: Component<Props> = (props) => {
 									<span class={styles.tag}>
 										<span>{item.label}</span>
 										<span
+											// biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
 											tabIndex={0}
 											aria-label={`remove ${item.label}`}
 											class={styles.removeItemBtn}
@@ -155,6 +156,7 @@ export const MultipleExample: Component<Props> = (props) => {
 				</div>
 			</Listbox>
 			<input
+				tabIndex={-1}
 				type='text'
 				aria-hidden='true'
 				style={{ display: "none" }}

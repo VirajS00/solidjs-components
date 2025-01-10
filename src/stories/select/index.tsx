@@ -119,6 +119,7 @@ export const Select: Component<Props> = (props) => {
 				</div>
 			</Listbox>
 			<input
+				tabIndex={-1}
 				type='text'
 				aria-hidden='true'
 				value={selected()}
