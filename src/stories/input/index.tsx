@@ -4,6 +4,7 @@ import styles from "./index.module.css";
 type Props = JSX.HTMLAttributes<HTMLInputElement> & {
 	name?: string;
 	id?: string;
+	placeholder?: string;
 };
 
 export const Input: Component<Props> = (props) => {
