@@ -1,0 +1,135 @@
+.input {
+	appearance: none;
+	border: 0;
+	outline: none;
+	background-color: transparent;
+	padding-inline: 0.5em;
+	height: 2.25em;
+	width: 100%;
+	font-size: 1rem;
+	font-family: inherit;
+}
+
+.input::placeholder {
+	color: #949494;
+}
+
+@media (prefers-reduced-motion) {
+	.input {
+		transition: none;
+	}
+}
+
+.inputWrap {
+	background-color: #f8f8f8;
+	border: 1px solid #ccc;
+	border-radius: 0.5rem;
+	font: inherit;
+	outline: none;
+	font-size: 1em;
+	transition: box-shadow 75ms ease;
+	display: inline-flex;
+	align-items: center;
+	width: 100%;
+}
+
+.inputWrap:has(input:focus) {
+	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3795fa;
+}
+
+.comboboxButton {
+	appearance: none;
+	border: 0;
+	height: 2.25em;
+	padding-inline-end: 0.75em;
+	background-color: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	outline: none;
+}
+
+.comboboxButton[aria-expanded="false"] svg {
+	transform: rotate(0deg);
+}
+
+.comboboxButton[aria-expanded="true"] svg {
+	transform: rotate(180deg);
+}
+
+.comboWrap {
+	position: relative;
+}
+
+.innerPannel {
+	position: absolute;
+	width: 100%;
+	padding-block: 0.25rem;
+	padding-inline-start: 0;
+	margin-top: 0.25rem;
+	overflow: auto;
+	font-size: 1rem;
+	background-color: white;
+	border-radius: 0.375rem;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	max-height: 15rem;
+	outline: none;
+	border: 1px solid #ccc;
+	list-style: none;
+}
+
+.transitionEnter {
+	transition: opacity 75ms ease-in, scale 75ms ease-in;
+	transform-origin: top left;
+}
+
+.transitionEnterFrom {
+	opacity: 0;
+	scale: 0.95;
+}
+
+.transitionEnterTo {
+	opacity: 1;
+	scale: 1;
+}
+
+.addPadding {
+	display: block;
+	padding-block: 0.5rem;
+	padding-inline: 1rem;
+}
+
+.option {
+	padding-block: 0.5rem;
+	cursor: default;
+	user-select: none;
+	position: relative;
+	padding-block: 0.5rem;
+	padding-inline: 1rem;
+	display: flex;
+	align-items: center;
+	outline: none;
+	justify-content: space-between;
+}
+
+.option[data-focus="true"] {
+	background-color: rgba(232, 243, 255, 0.713);
+	color: #2e79c8;
+}
+
+.placeholder {
+	color: #949494;
+}
+
+.marginTop {
+	margin-top: 0.25em;
+	margin-bottom: 0;
+}
+
+.option[aria-selected="true"] {
+	color: #3795fa;
+}
+
+.option[aria-selected="true"][data-focus="true"] {
+	color: #2e79c8;
+}
