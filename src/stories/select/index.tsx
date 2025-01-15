@@ -3,6 +3,7 @@ import {
 	For,
 	type JSX,
 	Show,
+	createEffect,
 	createMemo,
 	createSignal,
 	onMount,
@@ -25,11 +26,15 @@ export type SelectOption = {
 	value: string;
 };
 
-type Props = JSX.HTMLAttributes<HTMLInputElement> & {
+type Props = Omit<JSX.HTMLAttributes<HTMLInputElement>, "onChange"> & {
 	options: SelectOption[];
 	value?: string;
 	name?: string;
 	placeholder?: string;
+	onChange?: (value?: string) => void;
+	class?: string;
+	optionClass?: string;
+	optionsContainerClass?: string;
 };
 
 export const Select: Component<Props> = (props) => {
@@ -38,8 +43,12 @@ export const Select: Component<Props> = (props) => {
 		"value",
 		"placeholder",
 		"ref",
+		"onChange",
+		"class",
+		"optionClass",
+		"optionsContainerClass",
 	]);
-	const [selected, setSelected] = createSignal(local.value);
+	const [selected, setSelected] = createSignal<string | undefined>();
 	let inputRef: HTMLInputElement | undefined;
 
 	onMount(() => {
@@ -60,14 +69,32 @@ export const Select: Component<Props> = (props) => {
 		local.options.find((x) => x.value === selected())
 	);
 
+	const handleSelectChange = (val?: string) => {
+		setSelected(val);
+
+		local.onChange?.(val);
+	};
+
+	createEffect(() => {
+		if (local.value) {
+			setSelected(local.value);
+		}
+	});
+
 	return (
 		<>
 			<Listbox
 				defaultOpen={false}
+				multiple={false}
 				value={selected() ?? ""}
-				onSelectChange={setSelected}>
+				onSelectChange={handleSelectChange}>
 				<div class={styles.containerDiv}>
-					<ListboxButton type='button' class={styles.triggerButton}>
+					<ListboxButton
+						type='button'
+						class={styles.triggerButton}
+						classList={{
+							[local.class ?? ""]: !!local.class,
+						}}>
 						<>
 							<Show
 								when={selectedVal()}
@@ -93,11 +120,20 @@ export const Select: Component<Props> = (props) => {
 								leave={styles.transitionEnter}
 								leaveFrom={styles.transitionEnterTo}
 								leaveTo={styles.transitionEnterFrom}>
-								<ListboxOptions unmount={false} class={styles.listboxOptions}>
+								<ListboxOptions
+									unmount={false}
+									class={`${styles.listboxOptions} minimal-scrollbar`}
+									classList={{
+										[local.optionsContainerClass ?? ""]:
+											!!local.optionsContainerClass,
+									}}>
 									<For each={local.options}>
 										{(person): JSX.Element => (
 											<ListboxOption
 												class={styles.listboxItem}
+												classList={{
+													[local.optionClass ?? ""]: !!local.optionClass,
+												}}
 												value={person.value}>
 												{({ isSelected }): JSX.Element => (
 													<>
