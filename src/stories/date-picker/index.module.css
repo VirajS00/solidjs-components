@@ -1,0 +1,99 @@
+.container {
+	position: relative;
+}
+
+.inputContainer {
+	border: 1px solid #ccc;
+	display: flex;
+	border-radius: 0.325em;
+
+	&:has(input:focus) {
+		border-color: #3795fa;
+	}
+}
+
+.dateInput {
+	appearance: none;
+	border: 0;
+	outline: none;
+	min-width: 0;
+	flex: 1;
+	border-radius: 0.325em;
+	padding-inline: 0.75em;
+	padding-block: 0.5em;
+}
+
+.dateInput[type="date"]::-webkit-inner-spin-button,
+.dateInput[type="date"]::-webkit-calendar-picker-indicator {
+	display: none;
+	-webkit-appearance: none;
+}
+
+.dateInput::-webkit-datetime-edit-day-field {
+	border-radius: 0.25em;
+}
+
+.dateInput::-webkit-datetime-edit-day-field:focus {
+	background-color: #3795fa;
+	color: #fff;
+}
+
+.dateInput::-webkit-datetime-edit-month-field {
+	border-radius: 0.25em;
+}
+
+.dateInput::-webkit-datetime-edit-month-field:focus {
+	background-color: #3795fa;
+	color: #fff;
+}
+
+.dateInput::-webkit-datetime-edit-year-field {
+	border-radius: 0.25em;
+}
+
+.dateInput::-webkit-datetime-edit-year-field:focus {
+	background-color: #3795fa;
+	color: #fff;
+}
+
+.pickerButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	appearance: none;
+	background-color: transparent;
+	border: 0;
+	width: 2.5rem;
+	cursor: pointer;
+}
+
+.innerPannel {
+	position: absolute;
+	left: 0;
+	top: 100%;
+	width: fit-content;
+	padding: 0.5em;
+	margin-top: 0.25rem;
+	font-size: 1rem;
+	background-color: white;
+	border-radius: 0.375rem;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+	outline: none;
+	border: 1px solid #ccc;
+	list-style: none;
+}
+
+.transitionEnter {
+	transition: opacity 75ms ease-in, scale 75ms ease-in;
+	transform-origin: top left;
+}
+
+.transitionEnterFrom {
+	opacity: 0;
+	scale: 0.95;
+}
+
+.transitionEnterTo {
+	opacity: 1;
+	scale: 1;
+}
