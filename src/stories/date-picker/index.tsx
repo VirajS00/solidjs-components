@@ -14,6 +14,8 @@ import { Calendar } from "../calendar";
 
 type Props = JSX.HTMLAttributes<HTMLInputElement> & {
 	selectLayout?: boolean;
+	startYear?: number;
+	endYear?: number;
 };
 
 export const DatePicker: Component<Props> = (props) => {
@@ -23,7 +25,12 @@ export const DatePicker: Component<Props> = (props) => {
 
 	// biome-ignore lint/style/noParameterAssign: <explanation>
 	props = mergeProps({ selectLayout: true }, props);
-	const [local, rest] = splitProps(props, ["ref"]);
+	const [local, rest] = splitProps(props, [
+		"ref",
+		"startYear",
+		"endYear",
+		"selectLayout",
+	]);
 
 	const [selectedDay, setSelectedDay] = createSignal(new Date());
 
@@ -46,7 +53,6 @@ export const DatePicker: Component<Props> = (props) => {
 			{({ isOpen, close }) => {
 				document.addEventListener("keyup", (e) => {
 					if (e.code === "Escape") {
-						console.log("here");
 						close();
 					}
 				});
@@ -101,7 +107,9 @@ export const DatePicker: Component<Props> = (props) => {
 								<Calendar
 									selectedDay={selectedDay}
 									setSelectedDay={setSelectedDay}
-									selectLayout={props.selectLayout}
+									selectLayout={local.selectLayout}
+									startYear={local.startYear}
+									endYear={local.endYear}
 								/>
 							</PopoverPanel>
 						</Transition>

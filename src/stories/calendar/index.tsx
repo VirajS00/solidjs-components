@@ -6,6 +6,7 @@ import {
 	createSignal,
 	For,
 	Index,
+	mergeProps,
 	onMount,
 	type Setter,
 	Show,
@@ -24,8 +25,9 @@ type Props = {
 	class?: string;
 	selectLayout?: boolean;
 	onCalendarChange?: (e: CalendarValue) => void;
-	eventDates?: Accessor<Set<string> | undefined>;
 	showTodayButton?: boolean;
+	startYear?: number;
+	endYear?: number;
 };
 
 const findItem = (
@@ -58,13 +60,12 @@ const findClosestDay = (
 // TODO: Add multiple date select
 
 export const Calendar: Component<Props> = (props) => {
+	// biome-ignore lint/style/noParameterAssign: <explanation>
+	props = mergeProps({ startYear: 2000, endYear: 2035 }, props);
 	const [currentDay, setCurrentDay] = createSignal(new Date());
 
-	const startYear = 2000;
-	const endYear = 2035;
-
 	const years = [];
-	for (let i = startYear; i <= endYear; i += 1) {
+	for (let i = props.startYear ?? 0; i <= (props.endYear ?? 0); i += 1) {
 		years.push(i);
 	}
 
@@ -266,6 +267,9 @@ export const Calendar: Component<Props> = (props) => {
 			<div class={styles.buttonsContainer}>
 				<button
 					type='button'
+					disabled={
+						!!props.startYear && year() <= props.startYear && month() === 0
+					}
 					onClick={() => {
 						setCurrentDay(
 							new Date(
@@ -336,6 +340,9 @@ export const Calendar: Component<Props> = (props) => {
 				</Show>
 				<button
 					type='button'
+					disabled={
+						!!props.endYear && year() >= props.endYear && month() === 11
+					}
 					onClick={() => {
 						setCurrentDay(
 							new Date(

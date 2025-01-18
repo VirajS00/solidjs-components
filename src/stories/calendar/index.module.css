@@ -21,6 +21,11 @@
 	justify-content: center;
 }
 
+.monthChangeButton:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
 .monthLabel {
 	text-align: center;
 	font-size: 1em;
