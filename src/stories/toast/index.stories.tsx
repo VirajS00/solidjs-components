@@ -9,7 +9,17 @@ const ExampleStory = () => {
 				onClick={() =>
 					makeToast(
 						<div>
-							<div>hello</div>
+							<h1
+								style={{
+									"font-size": "1.2rem",
+									"margin-top": 0,
+									"margin-bottom": "0.25em",
+								}}>
+								Toast title
+							</h1>
+							<p style={{ "font-size": "0.875rem", margin: 0 }}>
+								This is the toast description
+							</p>
 						</div>,
 						{
 							duration: 5000,

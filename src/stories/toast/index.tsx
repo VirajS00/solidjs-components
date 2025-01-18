@@ -12,7 +12,7 @@ const moveToastsUp = (gap?: number) => {
 
 	for (const toast of toasts) {
 		if (toast.classList.contains("newest")) {
-			toast.style.bottom = "5px";
+			toast.style.bottom = "10px";
 			toast.classList.remove("newest");
 		} else {
 			const prevValue = toast.style.bottom.replace("px", "");
@@ -33,13 +33,18 @@ export const makeToast = (el: string | JSX.Element, options?: ToastOptions) => {
 
 	document.body.appendChild(popover);
 
-	// Show the popover
 	popover.showPopover();
 
 	setTimeout(() => {
 		popover.hidePopover();
-		popover.remove();
 	}, options?.duration ?? 2000);
+
+	setTimeout(
+		() => {
+			popover.remove();
+		},
+		options?.duration ? options.duration + 250 : 2250
+	);
 
 	popover.addEventListener("toggle", (event) => {
 		// biome-ignore lint/suspicious/noExplicitAny: <explanation>

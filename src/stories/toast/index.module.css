@@ -1,29 +1,32 @@
-.toast:popover-open {
-	position: fixed;
-	inset: unset;
-	right: 5px;
-	bottom: 5px;
-
-	opacity: 1;
-
-	transform: translateX(-100%);
-
-	@starting-style {
-		opacity: 0;
-		transform: translateX(0%);
-	}
-}
-
 .toast {
+	position: fixed;
+	inset: auto;
+	bottom: 10px;
+	right: 10px;
 	border: 1px solid #ccc;
 	padding: 0.5rem 1rem;
 	font-size: 1.2rem;
-	padding: 10px;
+	padding: 1rem;
 	transition-behavior: allow-discrete;
 	margin: 0;
+	border: 1px solid #ccc;
+	border-radius: 0.5em;
+	max-width: 20rem;
+	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 
-	transform: translateX(0);
+	opacity: 0;
+	transform: translateX(100%);
 
-	transition: opacity 500ms, transform 500ms, overlay 500ms allow-discrete,
-		display 500ms allow-discrete, margin 500ms allow-discrete;
+	transition: opacity 250ms, transform 250ms, overlay 250ms allow-discrete,
+		display 250ms allow-discrete;
+}
+
+.toast:popover-open {
+	opacity: 1;
+	transform: translateX(0%);
+
+	@starting-style {
+		opacity: 0;
+		transform: translateX(100%);
+	}
 }
