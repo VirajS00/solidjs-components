@@ -1,0 +1,116 @@
+.button {
+	appearance: none;
+	border: 1px solid;
+	font-size: 0.875rem;
+	padding-inline: 1em;
+	height: 2.25rem;
+	font-weight: 500;
+	border-radius: 0.625em;
+	cursor: pointer;
+	outline: none;
+	transition: box-shadow 150ms ease, background-color 100ms ease,
+		color 100ms ease;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+
+	&:hover {
+		background-color: var(--hover-bg);
+	}
+
+	&:focus-visible {
+		box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--bg-color);
+	}
+}
+
+@media (prefers-reduced-motion) {
+	.button {
+		transition: none;
+	}
+}
+
+.filled {
+	border: 0;
+	background-color: var(--bg-color);
+	color: var(--text-color);
+}
+
+.outline {
+	border-color: var(--bg-color);
+	color: var(--bg-color);
+	background-color: #fff;
+
+	&:hover {
+		color: var(--text-color);
+		border-color: var(--hover-bg);
+	}
+}
+
+.ghost {
+	--bg-color: #fff;
+	--hover-bg: #eee;
+	--text-color: #333;
+
+	&:focus-visible {
+		box-shadow: 0 0 0 2px #fff, 0 0 0 4px #333;
+	}
+}
+
+.link {
+	color: var(--bg-color);
+	text-underline-offset: 0.25em;
+	height: auto;
+	padding: 0;
+	background-color: transparent;
+	border: 0;
+	border-radius: 0.25em;
+
+	&:hover {
+		background-color: transparent;
+	}
+
+	&:focus-visible {
+		box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--bg-color);
+	}
+
+	&:hover {
+		color: var(--hover-bg);
+		text-decoration: underline;
+	}
+}
+
+.default {
+	--bg-color: #146ccb;
+	--hover-bg: #1056a1;
+	--text-color: #fff;
+}
+
+.monochrome {
+	--bg-color: #575757;
+	--hover-bg: #333;
+	--text-color: #fff;
+}
+
+.secondary {
+	--bg-color: #bb09c2;
+	--hover-bg: #8d1f91;
+	--text-color: #fff;
+}
+
+.warning {
+	--bg-color: #ffbc1f;
+	--hover-bg: #ffd46e;
+	--text-color: #000;
+}
+
+.success {
+	--bg-color: #189448;
+	--hover-bg: #16723a;
+	--text-color: #fff;
+}
+
+.error {
+	--bg-color: #d21818;
+	--hover-bg: #a11515;
+	--text-color: #fff;
+}
