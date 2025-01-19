@@ -23,6 +23,8 @@ const ExampleStory = () => {
 						</div>,
 						{
 							duration: 5000,
+							transitionDuration: 500,
+							variant: "default",
 						}
 					)
 				}>
