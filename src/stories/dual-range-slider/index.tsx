@@ -40,8 +40,8 @@ export const DualRangeInput: Component<Props> = (props) => {
 				setFromVal(val[0]);
 				setToVal(val[1]);
 
-				fromSliderRef.defaultValue = val[0].toString();
-				toSliderRef.defaultValue = val[1].toString();
+				fromSliderRef.value = val[0].toString();
+				toSliderRef.value = val[1].toString();
 			}
 		}
 
@@ -66,6 +66,11 @@ export const DualRangeInput: Component<Props> = (props) => {
 
 					setFromVal(val[0]);
 					setToVal(val[1]);
+
+					if (fromSliderRef && toSliderRef) {
+						fromSliderRef.defaultValue = val[0].toString();
+						toSliderRef.defaultValue = val[1].toString();
+					}
 				}
 			});
 		}
@@ -114,7 +119,7 @@ export const DualRangeInput: Component<Props> = (props) => {
 				aria-hidden='true'
 				value={`${fromVal()},${toVal()}`}
 				style={{ display: "none" }}
-				data-type='rnge-array'
+				data-type='range-array'
 				tabIndex={-1}
 				ref={(node) => {
 					if (typeof local.ref === "function") {
