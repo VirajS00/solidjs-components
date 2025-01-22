@@ -12,6 +12,18 @@ export const Label: Component<Props> = (props) => {
 		<label
 			class={styles.label}
 			classList={{ [local.class ?? ""]: !!local.class, ...local.classList }}
+			onClick={(e) => {
+				const closesSelect: HTMLDivElement | null =
+					(e.target.nextSibling as HTMLDivElement) ||
+					(e.target.previousSibling as HTMLDivElement) ||
+					e.target.querySelector("[tc-type='listbox']");
+
+				if (closesSelect && closesSelect instanceof HTMLDivElement) {
+					const btn: HTMLButtonElement | null =
+						closesSelect.querySelector('[tc-type="button"]');
+					btn?.focus();
+				}
+			}}
 			{...rest}
 		/>
 	);

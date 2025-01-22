@@ -88,7 +88,7 @@ export const Select: Component<Props> = (props) => {
 				multiple={false}
 				value={selected() ?? ""}
 				onSelectChange={handleSelectChange}>
-				<div class={styles.containerDiv}>
+				<div class={`${styles.containerDiv} custom-select`}>
 					<ListboxButton
 						type='button'
 						class={styles.triggerButton}
