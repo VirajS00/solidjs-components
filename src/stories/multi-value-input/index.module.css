@@ -1,0 +1,24 @@
+.inputsContainer {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.5em;
+}
+
+.inputContainer {
+	display: grid;
+	grid-template-columns: 1fr 2.25rem;
+	gap: 0.5em;
+
+	& button {
+		align-items: center;
+		justify-content: center;
+	}
+
+	& button svg {
+		flex-shrink: 0;
+	}
+}
+
+.addBtn {
+	margin-block-start: 0.75em;
+}
