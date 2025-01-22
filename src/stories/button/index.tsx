@@ -20,6 +20,7 @@ type Props<T extends ValidComponent, P = ComponentProps<T>> = {
 		| "ghost";
 	variant?: "filled" | "outline" | "link";
 	as?: T;
+	class?: string;
 };
 
 export const Button = <T extends ValidComponent>(props: Props<T>) => {
