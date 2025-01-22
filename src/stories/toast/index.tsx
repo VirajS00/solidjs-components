@@ -2,7 +2,7 @@ import { Show, type JSX } from "solid-js";
 import styles from "./index.module.css";
 import { IconClose } from "../icons/icon-close";
 
-type Varaint = "success" | "error" | "warning" | "default";
+export type Varaint = "success" | "error" | "warning" | "default";
 
 export type ToastOptions = {
 	gap?: number;
