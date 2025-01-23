@@ -1,7 +1,7 @@
 import {
 	type Component,
 	createSignal,
-	For,
+	Index,
 	type JSX,
 	onMount,
 	splitProps,
@@ -64,18 +64,47 @@ export const MultiValueInput: Component<Props> = (props) => {
 		}
 	});
 
+	const handleAddNewItem: JSX.EventHandlerUnion<
+		HTMLButtonElement,
+		MouseEvent,
+		JSX.EventHandler<HTMLButtonElement, MouseEvent>
+	> = () => {
+		const ii = [...items()];
+		ii.push("");
+		setItems(ii);
+
+		const inputs = inputContainerRef?.querySelectorAll("input");
+		inputs?.[inputs.length - 1].focus();
+	};
+
+	const handleOnItemRemove = (index: number) => {
+		setItems((it) => {
+			const ii = [...it];
+
+			if (index === 0 && ii.length === 1) {
+				return [""];
+			}
+
+			if (index > -1) {
+				ii.splice(index, 1);
+			}
+
+			return ii;
+		});
+	};
+
 	return (
 		<div>
 			<div class={styles.inputsContainer} ref={inputContainerRef}>
-				<For each={items()}>
+				<Index each={items()}>
 					{(item, i) => (
 						<div class={styles.inputContainer}>
 							<Input
 								type='text'
-								value={item}
+								value={item()}
 								onInput={(e) => {
 									const newItems = [...items()];
-									newItems[i()] = e.target.value;
+									newItems[i] = e.target.value;
 									setItems(newItems);
 								}}
 							/>
@@ -84,26 +113,12 @@ export const MultiValueInput: Component<Props> = (props) => {
 								variant='outline'
 								color='monochrome'
 								aria-label='Remove Item'
-								onClick={() => {
-									setItems((it) => {
-										const ii = [...it];
-
-										if (i() === 0 && ii.length === 1) {
-											return [""];
-										}
-
-										if (i() > -1) {
-											ii.splice(i(), 1);
-										}
-
-										return ii;
-									});
-								}}>
+								onClick={() => handleOnItemRemove(i)}>
 								<IconClose size={16} />
 							</Button>
 						</div>
 					)}
-				</For>
+				</Index>
 			</div>
 			<Button
 				as='button'
@@ -111,11 +126,7 @@ export const MultiValueInput: Component<Props> = (props) => {
 				variant='outline'
 				color='monochrome'
 				class={styles.addBtn}
-				onClick={() => {
-					const ii = [...items()];
-					ii.push("");
-					setItems(ii);
-				}}>
+				onClick={handleAddNewItem}>
 				<IconPlus /> Add Item
 			</Button>
 			<input
