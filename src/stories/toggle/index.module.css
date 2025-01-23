@@ -10,12 +10,12 @@
 .switchLabel {
 	display: inline-flex;
 	align-items: center;
-	border: 1px solid #dadada;
+	border: 1px solid #d9d9d9;
 	border-radius: 100vh;
 	cursor: pointer;
-	background-color: #eee;
+	background-color: #ededed;
 	height: 1.25em;
-	width: 2.5em;
+	width: 2.25em;
 	transition: background-color 75ms ease, box-shadow 75ms ease;
 }
 
@@ -27,12 +27,13 @@
 
 .switchIndicator {
 	display: block;
-	height: 1em;
-	width: 1em;
-	background-color: #6b6b6b;
+	height: 0.9em;
+	width: 0.9em;
+	background-color: #fff;
 	border-radius: 50%;
-	transform: translateX(0.05em);
-	transition: transform 150ms ease, background-color 75ms ease;
+	transform: translateX(0.1em);
+	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+	transition: transform 100ms ease, background-color 100ms ease;
 }
 
 .checkInput:focus-visible + .switchLabel {
@@ -46,7 +47,6 @@
 	}
 
 	& + .switchLabel .switchIndicator {
-		background-color: #fff;
-		transform: translateX(calc(100% + 0.3em));
+		transform: translateX(calc(100% + 0.2em));
 	}
 }
