@@ -23,7 +23,9 @@ type Props<T extends ValidComponent, P = ComponentProps<T>> = {
 	class?: string;
 };
 
-export const Button = <T extends ValidComponent>(props: Props<T>) => {
+export const Button = <T extends ValidComponent = "button">(
+	props: Props<T>
+) => {
 	// biome-ignore lint/style/noParameterAssign: <explanation>
 	props = mergeProps(
 		{ color: "default", variant: "filled", as: "button" },

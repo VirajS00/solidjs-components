@@ -121,7 +121,6 @@ export const MultiValueInput: Component<Props> = (props) => {
 				</Index>
 			</div>
 			<Button
-				as='button'
 				type='button'
 				variant='outline'
 				color='monochrome'
