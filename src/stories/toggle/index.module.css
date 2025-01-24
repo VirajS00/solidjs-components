@@ -36,6 +36,12 @@
 	transition: transform 100ms ease, background-color 100ms ease;
 }
 
+@media (prefers-reduced-motion) {
+	.switchIndicator {
+		transition: none;
+	}
+}
+
 .checkInput:focus-visible + .switchLabel {
 	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3795fa;
 }
