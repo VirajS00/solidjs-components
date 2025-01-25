@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "storybook-solidjs";
-import { MultipleExample } from ".";
+import { MultiSelect } from ".";
 import type { SelectOption } from "../select";
 import { onMount } from "solid-js";
 
@@ -28,7 +28,7 @@ const ExampleStory = () => {
 
 	return (
 		<form>
-			<MultipleExample options={fruits} ref={ref} />
+			<MultiSelect options={fruits} ref={ref} />
 			<input type='reset' />
 		</form>
 	);

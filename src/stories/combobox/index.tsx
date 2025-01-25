@@ -16,6 +16,8 @@ type Props = JSX.HTMLAttributes<HTMLInputElement> & {
 	options: string[];
 	label: string;
 	placeholder?: string;
+	name?: string;
+	id?: string;
 };
 
 export const Combobox: Component<Props> = (props) => {
@@ -234,7 +236,6 @@ export const Combobox: Component<Props> = (props) => {
 							</div>
 							<Transition
 								show={isOpen()}
-								class={styles.marginTop}
 								enter={styles.transitionEnter}
 								enterFrom={styles.transitionEnterFrom}
 								enterTo={styles.transitionEnterTo}

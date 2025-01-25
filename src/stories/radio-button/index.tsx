@@ -3,7 +3,7 @@ import { generateRandomString } from "../../utils/random-string";
 import styles from "./index.module.css";
 
 type Props = JSX.HTMLAttributes<HTMLInputElement> & {
-	value?: string | number | string[];
+	value?: string;
 	name?: string;
 };
 

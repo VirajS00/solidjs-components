@@ -5,6 +5,7 @@ import styles from "./index.module.css";
 
 type Props = JSX.HTMLAttributes<HTMLInputElement> & {
 	value?: string | number | string[];
+	name?: string;
 };
 
 export const Checkbox: Component<Props> = (props) => {

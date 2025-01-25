@@ -1,4 +1,5 @@
 import {
+	createMemo,
 	createSignal,
 	mergeProps,
 	onMount,
@@ -18,7 +19,7 @@ type Props = JSX.HTMLAttributes<HTMLInputElement> & {
 export const DualRangeInput: Component<Props> = (props) => {
 	const defaultProps = { min: 0, max: 100 };
 	const p = mergeProps(defaultProps, props);
-	const [local, rest] = splitProps(p, ["ref", "min", "max", "value"]);
+	const [local, rest] = splitProps(p, ["ref", "min", "max", "value", "name"]);
 	const [fromVal, setFromVal] = createSignal(local.value?.[0] ?? 0);
 	const [toVal, setToVal] = createSignal(local.value?.[1] ?? 0);
 
@@ -45,9 +46,12 @@ export const DualRangeInput: Component<Props> = (props) => {
 			}
 		}
 
-		if (local.value) {
+		if (fromSliderRef && toSliderRef && local.value) {
 			setFromVal(local.value[0]);
 			setToVal(local.value[1]);
+
+			fromSliderRef.value = local.value[0].toString();
+			toSliderRef.value = local.value[1].toString();
 		}
 
 		const form = inputRef.closest("form");
@@ -94,24 +98,32 @@ export const DualRangeInput: Component<Props> = (props) => {
 		e.target.value = value.toString();
 	};
 
+	const fromPercent = createMemo(() => (fromVal() / local.max) * 100);
+	const toPercent = createMemo(() => (toVal() / local.max) * 100);
+
 	return (
 		<div
 			class={styles.sliderContainer}
-			style={{ "--from-value": `${fromVal()}%`, "--to-value": `${toVal()}%` }}>
+			style={{
+				"--from-value": `${fromPercent()}%`,
+				"--to-value": `${toPercent()}%`,
+			}}>
 			<input
 				type='range'
-				value={fromVal()}
 				onInput={handleFromInput}
 				class={`${styles.rangeInput} ${styles.fromSlider}`}
 				ref={fromSliderRef}
+				min={local.min}
+				max={local.max}
 				{...rest}
 			/>
 			<input
 				type='range'
-				value={toVal()}
 				class={`${styles.rangeInput} ${styles.toSlider}`}
 				ref={toSliderRef}
 				onInput={handleToInput}
+				min={local.min}
+				max={local.max}
 				{...rest}
 			/>
 			<input
@@ -120,6 +132,7 @@ export const DualRangeInput: Component<Props> = (props) => {
 				value={`${fromVal()},${toVal()}`}
 				style={{ display: "none" }}
 				data-type='range-array'
+				name={local.name}
 				tabIndex={-1}
 				ref={(node) => {
 					if (typeof local.ref === "function") {

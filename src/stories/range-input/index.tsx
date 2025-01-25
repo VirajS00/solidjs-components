@@ -26,14 +26,13 @@ export const RangeInput: Component<Props> = (props) => {
 		}
 
 		const inputValue = (inputRef.defaultValue ?? inputRef.value).trim();
-		const numVal = rest.value ?? Number.parseFloat(inputValue);
+		let numVal = rest.value ?? Number.parseFloat(inputValue);
 
 		if (Number.isNaN(numVal)) {
-			console.log("Invalid input: not a number");
-			return;
+			numVal = 50;
 		}
 
-		const percent = (numVal / (rest.max ?? 0)) * 100;
+		const percent = (numVal / (rest.max ?? 100)) * 100;
 
 		inputRef.style.setProperty("--progress", `${percent}% `);
 
@@ -49,11 +48,10 @@ export const RangeInput: Component<Props> = (props) => {
 			}
 
 			const inputValue = inputRef.defaultValue.trim();
-			const numVal = rest.value ?? Number.parseFloat(inputValue);
+			let numVal = rest.value ?? Number.parseFloat(inputValue);
 
 			if (Number.isNaN(numVal)) {
-				console.log("Invalid input: not a number");
-				return;
+				numVal = 50;
 			}
 
 			const percent = (numVal / (rest.max ?? 0)) * 100;
@@ -66,6 +64,7 @@ export const RangeInput: Component<Props> = (props) => {
 		<input
 			type='range'
 			class={styles.rangeInput}
+			data-type='number'
 			ref={(node) => {
 				if (typeof local.ref === "function") {
 					local.ref(node);

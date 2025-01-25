@@ -16,12 +16,14 @@ type Props = JSX.HTMLAttributes<HTMLInputElement> & {
 	selectLayout?: boolean;
 	startYear?: number;
 	endYear?: number;
+	name?: string;
 };
 
 export const DatePicker: Component<Props> = (props) => {
 	let pannelRef: HTMLDivElement | undefined;
 	let buttonRef: HTMLButtonElement | undefined;
 	let inputRef: HTMLInputElement | undefined;
+	let dateInputRef: HTMLInputElement | undefined;
 
 	// biome-ignore lint/style/noParameterAssign: <explanation>
 	props = mergeProps({ selectLayout: true }, props);
@@ -37,6 +39,19 @@ export const DatePicker: Component<Props> = (props) => {
 	onMount(() => {
 		if (inputRef?.defaultValue) {
 			setSelectedDay(new Date(Number.parseFloat(inputRef.defaultValue) * 1000));
+		}
+
+		const form = inputRef?.closest("form");
+
+		if (form) {
+			form.addEventListener("reset", () => {
+				if (!dateInputRef || !inputRef) return;
+				dateInputRef.defaultValue = new Date(
+					Number.parseFloat(inputRef.defaultValue) * 1000
+				)
+					.toISOString()
+					.substring(0, 10);
+			});
 		}
 	});
 
@@ -83,6 +98,7 @@ export const DatePicker: Component<Props> = (props) => {
 										setSelectedDay(dd);
 									}
 								}}
+								ref={dateInputRef}
 							/>
 							<PopoverButton
 								type='button'
@@ -94,6 +110,7 @@ export const DatePicker: Component<Props> = (props) => {
 						</div>
 						<Transition
 							show={isOpen()}
+							class={styles.transition}
 							enter={styles.transitionEnter}
 							enterFrom={styles.transitionEnterFrom}
 							enterTo={styles.transitionEnterTo}
@@ -118,6 +135,7 @@ export const DatePicker: Component<Props> = (props) => {
 							tabIndex={-1}
 							style={{ display: "none" }}
 							value={Math.floor(selectedDay().getTime() / 1000)}
+							data-type='date'
 							ref={(node) => {
 								if (typeof local.ref === "function") {
 									local.ref(node);

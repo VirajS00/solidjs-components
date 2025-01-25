@@ -15,10 +15,16 @@ import { Button } from "../button";
 type Props = Omit<JSX.HTMLAttributes<HTMLInputElement>, "value"> & {
 	value?: string[];
 	name?: string;
+	placeholder?: string;
 };
 
 export const MultiValueInput: Component<Props> = (props) => {
-	const [local, rest] = splitProps(props, ["class", "value", "ref"]);
+	const [local, rest] = splitProps(props, [
+		"class",
+		"value",
+		"ref",
+		"placeholder",
+	]);
 	const [items, setItems] = createSignal<string[]>([""]);
 
 	let inputRef: HTMLInputElement | undefined;
@@ -101,6 +107,7 @@ export const MultiValueInput: Component<Props> = (props) => {
 						<div class={styles.inputContainer}>
 							<Input
 								type='text'
+								placeholder={local.placeholder}
 								value={item()}
 								onInput={(e) => {
 									const newItems = [...items()];

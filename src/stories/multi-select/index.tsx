@@ -18,10 +18,11 @@ type Props = JSX.HTMLAttributes<HTMLInputElement> & {
 	value?: string[];
 	options: SelectOption[];
 	placeholder?: string;
+	name?: string;
 };
 
 // TODO: Fix propogation on inside button
-export const MultipleExample: Component<Props> = (props) => {
+export const MultiSelect: Component<Props> = (props) => {
 	const [local, rest] = splitProps(props, [
 		"value",
 		"options",

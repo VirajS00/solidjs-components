@@ -11,7 +11,7 @@
 	padding-block: 0.3rem;
 	min-height: 2.25rem;
 	padding-inline-start: 0.75rem;
-	background-color: #f8f8f8;
+	background-color: #fff;
 	border: 1px solid #ccc;
 	text-align: left;
 	border-radius: 0.5rem;
@@ -70,6 +70,7 @@
 	outline: none;
 	border: 1px solid #ccc;
 	list-style: none;
+	z-index: 1000;
 }
 
 .triggerIconContainer {
