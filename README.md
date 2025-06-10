@@ -1,6 +1,8 @@
 # Solid JS Form components
 
-A collection of custom form components for Solid JS which utilize the browser's default Form APIs.
+A collection of custom form components for Solid JS which utilize the browser's default Form APIs. This project is still work in progress.
+
+Feel free to contribute in you want to :).
 
 ## Usage
 
@@ -23,7 +25,7 @@ Runs storybook so you can preview the components.<br>
 - Button
 - Calendar
 - Checkbox
-- Combox
+- Combobox
 - Date Picker
 - Dual Range Slider
 - Form
