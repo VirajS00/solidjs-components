@@ -1,4 +1,5 @@
 import {
+	createEffect,
 	createSignal,
 	For,
 	Show,
@@ -30,12 +31,60 @@ export const Combobox: Component<Props> = (props) => {
 	]);
 	const [pannelId, setPannelId] = createSignal("");
 	const [opts, setOpts] = createSignal<string[]>(local.options);
+	const [currentItem, setCurrentItem] = createSignal<{
+		index: number;
+		trigger?: "keyboard" | "mouse" | undefined;
+	}>({ index: -1 });
 
 	let inputRef: HTMLInputElement | undefined;
 	let pannelRef: HTMLUListElement | undefined;
 	let buttonRef: HTMLButtonElement | undefined;
 
 	const random = generateRandomString(8);
+
+	const options: IntersectionObserverInit = {
+		root: pannelRef,
+		rootMargin: "0px",
+		threshold: 1.0,
+	};
+
+	const intersectionCallback: IntersectionObserverCallback = (entries) => {
+		entries.forEach((entry) => {
+			if (!entry.isIntersecting) {
+				const target = entry.target as HTMLElement;
+				if (pannelRef && target) {
+					const panelRect = pannelRef.getBoundingClientRect();
+					const targetRect = target.getBoundingClientRect();
+					const offset = targetRect.top - panelRect.top + pannelRef.scrollTop;
+					// Scroll so the target is just inside the panel, with a small margin
+					const margin = 8; // px
+					if (targetRect.top < panelRect.top) {
+						// Target is above the visible area
+						pannelRef.scrollTo({ top: offset - margin });
+					} else if (targetRect.bottom > panelRect.bottom) {
+						// Target is below the visible area
+						pannelRef.scrollTo({
+							top: offset - panelRect.height + targetRect.height + margin,
+						});
+					}
+				}
+			}
+		});
+	};
+
+	const observer = new IntersectionObserver(intersectionCallback, options);
+
+	createEffect(() => {
+		const item = currentItem();
+		observer.disconnect();
+
+		const currentEl: HTMLLIElement | null | undefined =
+			pannelRef?.querySelector(`#lb-option-${random}-${item.index}`);
+
+		if (currentEl && item.trigger === "keyboard") {
+			observer.observe(currentEl);
+		}
+	});
 
 	return (
 		<>
@@ -85,8 +134,11 @@ export const Combobox: Component<Props> = (props) => {
 									aria-controls={pannelId()}
 									aria-autocomplete='list'
 									aria-expanded={isOpen()}
-									// biome-ignore lint/a11y/useValidAriaValues: <explanation>
-									aria-activedescendant=''
+									aria-activedescendant={
+										currentItem().index === -1
+											? ""
+											: `lb-option-${random}-${currentItem().index}`
+									}
 									onInput={(e) => {
 										const inputValue = e.currentTarget.value.trim();
 
@@ -122,77 +174,40 @@ export const Combobox: Component<Props> = (props) => {
 											local.onInput(e);
 										}
 									}}
-									onKeyUp={(e) => {
+									onKeyDown={(e) => {
 										if (e.code === "ArrowUp") {
 											e.preventDefault();
 
-											const els =
-												pannelRef?.querySelectorAll<HTMLLIElement>("li");
-											if (!els || els.length === 0) return;
-
-											const elArr = [...els];
-
-											const currentFocused = elArr.find(
-												(el) => el.getAttribute("data-focus") === "true"
-											);
-
-											for (const el of elArr) {
-												el.setAttribute("data-focus", "false");
-											}
-
-											if (currentFocused) {
-												const currentIndex = elArr.indexOf(currentFocused);
-												const prevIndex =
-													(currentIndex - 1 + elArr.length) % elArr.length;
-												elArr[prevIndex].setAttribute("data-focus", "true");
-												e.target?.setAttribute(
-													"aria-activedescendant",
-													elArr[prevIndex]?.id ?? ""
-												);
-											} else {
-												elArr[elArr.length - 1].setAttribute(
-													"data-focus",
-													"true"
-												);
-												e.target?.setAttribute(
-													"aria-activedescendant",
-													elArr[elArr.length - 1]?.id ?? ""
-												);
-											}
+											setCurrentItem((it) => {
+												const opt = opts();
+												if (it.index === 0) {
+													return { index: opt.length - 1, trigger: "keyboard" };
+												} else if (it.index > 0 && it.index <= opt.length - 1) {
+													return { index: it.index - 1, trigger: "keyboard" };
+												} else if (opt.length > 0) {
+													return {
+														index: opt.length - 1,
+														trigger: "keyboard",
+													};
+												} else {
+													return { index: opt.length - 1, trigger: "keyboard" };
+												}
+											});
 										}
 
 										if (e.code === "ArrowDown") {
 											e.preventDefault();
 
-											const els =
-												pannelRef?.querySelectorAll<HTMLLIElement>("li");
-											if (!els || els.length === 0) return;
-
-											const elArr = [...els];
-
-											const currentFocused = elArr.find(
-												(el) => el.getAttribute("data-focus") === "true"
-											);
-
-											for (const el of elArr) {
-												el.setAttribute("data-focus", "false");
-											}
-
-											if (currentFocused) {
-												const nextIndex =
-													(elArr.indexOf(currentFocused) + 1) % elArr.length;
-												elArr[nextIndex]?.setAttribute("data-focus", "true");
-												e.target?.setAttribute(
-													"aria-activedescendant",
-													elArr[nextIndex]?.id ?? ""
-												);
-											} else {
-												elArr[0].setAttribute("data-focus", "true");
-												e.target?.setAttribute(
-													"aria-activedescendant",
-													elArr[0]?.id ?? ""
-												);
-											}
+											setCurrentItem((it) => {
+												const opt = opts();
+												if (opt.length === 0) {
+													return { index: -1, trigger: "keyboard" };
+												}
+												if (it.index < 0 || it.index >= opt.length - 1) {
+													return { index: 0, trigger: "keyboard" };
+												}
+												return { index: it.index + 1, trigger: "keyboard" };
+											});
 										}
 									}}
 									onKeyPress={(e) => {
@@ -272,34 +287,13 @@ export const Combobox: Component<Props> = (props) => {
 												// biome-ignore lint/a11y/useSemanticElements: <explanation>
 												role='option'
 												id={`lb-option-${random}-${i()}`}
-												data-focus='false'
 												aria-selected={option === inputRef?.value}
-												onMouseEnter={(e) => {
-													const els =
-														pannelRef?.querySelectorAll<HTMLLIElement>("li");
-
-													if (els) {
-														for (const el of els) {
-															el.setAttribute("data-focus", "false");
-														}
-													}
-													e.currentTarget.setAttribute("data-focus", "true");
-													inputRef?.setAttribute(
-														"aria-activedescendant",
-														e.target?.id ?? ""
-													);
+												data-focus={currentItem().index === i()}
+												onMouseEnter={() => {
+													setCurrentItem({ index: i(), trigger: "mouse" });
 												}}
-												onMouseLeave={(e) => {
-													const els =
-														pannelRef?.querySelectorAll<HTMLLIElement>("li");
-
-													if (els) {
-														for (const el of els) {
-															el.setAttribute("data-focus", "false");
-														}
-													}
-													e.currentTarget.setAttribute("data-focus", "false");
-													inputRef?.setAttribute("aria-activedescendant", "");
+												onMouseLeave={() => {
+													setCurrentItem({ index: -1, trigger: "mouse" });
 												}}
 												onClick={() => {
 													if (!inputRef) {
