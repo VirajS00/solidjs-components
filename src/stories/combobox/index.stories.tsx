@@ -4,11 +4,22 @@ import { Label } from "../label";
 import { onMount } from "solid-js";
 
 const options = [
-	"Puns",
-	"Riddles",
-	"Observations",
-	"Knock-knock",
-	"One liners",
+	"Chon",
+	"Toto",
+	"Sara Watkins",
+	"Chris Thile",
+	"Vulfpeck",
+	"Jizue",
+	"Elephant Gym",
+	"Sungazers",
+	"Pineapple Express",
+	"Toe",
+	"Yuvette Young",
+	"Maddison Cunningham",
+	"Scary Pockets",
+	"Animals As Leaders",
+	"Victor Wooten",
+	"American Football",
 ];
 
 const ExampleStory = () => {
@@ -24,7 +35,7 @@ const ExampleStory = () => {
 		<form
 			style={{ display: "flex", gap: "0.25em", "flex-direction": "column" }}>
 			<Label for='my-combobox' style={{ "padding-left": "0.5em" }}>
-				Pick what type of jokes you like
+				Favorite Music Artist
 			</Label>
 			<Combobox
 				options={options}
