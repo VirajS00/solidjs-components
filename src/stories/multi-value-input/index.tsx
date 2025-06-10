@@ -101,6 +101,9 @@ export const MultiValueInput: Component<Props> = (props) => {
 
 			return ii;
 		});
+
+		const inputs = inputContainerRef?.querySelectorAll("input");
+		inputs?.[inputs.length - 1].focus();
 	};
 
 	return (
