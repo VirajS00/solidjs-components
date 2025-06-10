@@ -12,6 +12,10 @@ import { IconPlus } from "../icons/icon-plus";
 import { Input } from "../input";
 import { Button } from "../button";
 
+// Joining logic
+// arr.join('\x1F')
+// arr.join('\uE000')
+
 type Props = Omit<JSX.HTMLAttributes<HTMLInputElement>, "value"> & {
 	value?: string[];
 	name?: string;
