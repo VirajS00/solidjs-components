@@ -18,10 +18,28 @@ import { Combobox } from "../combobox";
 import { TextArea } from "../textarea";
 import { Toggle } from "../toggle";
 import { Button } from "../button";
+import { makeToast } from "../toast";
 
 const ExampleStory = () => {
+	const handleSubmit = (vals: any) => {
+		makeToast(
+			<div>
+				<h5 style={{ "margin-top": 0 }}>Vals</h5>
+				<pre class={styles.toastVals}>{JSON.stringify(vals, undefined, 2)}</pre>
+			</div>,
+			{
+				duration: 5000,
+				transitionDuration: 500,
+				variant: "default",
+			}
+		);
+	};
+
 	return (
-		<Form class={styles.formContainer} data={DummyFormData}>
+		<Form
+			class={styles.formContainer}
+			data={DummyFormData}
+			onSubmit={handleSubmit}>
 			<h2>Sample Form</h2>
 			<div class={styles.inputContainer}>
 				<Label for='firstName'>First Name</Label>

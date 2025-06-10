@@ -124,13 +124,13 @@ const getFormValues = (form: HTMLFormElement) => {
 
 type Props = Omit<JSX.HTMLAttributes<HTMLFormElement>, "onSubmit"> & {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	onSubit?: (data: any) => void | Promise<void>;
+	onSubmit?: (data: any) => void | Promise<void>;
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	data?: { [key: string]: any };
 };
 
 export const Form: Component<Props> = (props) => {
-	const [local, rest] = splitProps(props, ["onSubit", "data", "ref"]);
+	const [local, rest] = splitProps(props, ["onSubmit", "data", "ref"]);
 	let formRef: HTMLFormElement | undefined;
 
 	onMount(() => {
@@ -147,8 +147,7 @@ export const Form: Component<Props> = (props) => {
 		e.preventDefault();
 		const vals = getFormValues(e.currentTarget);
 
-		local?.onSubit?.(vals);
-		console.log(vals);
+		local?.onSubmit?.(vals);
 	};
 
 	return (
