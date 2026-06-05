@@ -1,28 +1,42 @@
+# Solid JS Form components
+
+A collection of custom form components for Solid JS which utilize the browser's default Form APIs. This project is still work in progress.
+
+Feel free to contribute in you want to :).
+
 ## Usage
 
 ```bash
-$ npm install # or pnpm install or yarn install
+$ pnpm install
 ```
-
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm run dev`
+```bash
+$ pnpm run storybook
+```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
+Runs storybook so you can preview the components.<br>
 
-### `npm run build`
+### All the components currently included:
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-## Deployment
-
-Learn more about deploying your application with the [documentations](https://vite.dev/guide/static-deploy.html)
+- Button
+- Calendar
+- Checkbox
+- Combobox
+- Date Picker
+- Dual Range Slider
+- Form
+- Text Input
+- Label
+- Multi Select
+- Multi String
+- Multi Value Input
+- Radio button
+- Range Input
+- Select
+- Text Area
+- Toast
+- Toggle
