@@ -1,6 +1,6 @@
-# Solid JS Form components
+# Solid JS components
 
-A collection of custom form components for Solid JS which utilize the browser's default Form APIs. This project is still work in progress.
+A collection of custom components for Solid JS which utilize some of the browser's default APIs. This project is still work in progress.
 
 Feel free to contribute in you want to :).
 
