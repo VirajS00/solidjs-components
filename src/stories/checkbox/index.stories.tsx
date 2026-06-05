@@ -4,11 +4,9 @@ import { Checkbox } from ".";
 
 const ExampleStory = () => {
   return (
-    <div>
+    <div style={{ display: "flex", gap: "0.5rem", "align-items": "center" }}>
       <Checkbox id="my-checkbox" value="item-1" />
-      <Label for="my-checkbox" style={{ "padding-left": "0.5em" }}>
-        Item 1
-      </Label>
+      <Label for="my-checkbox">Item 1</Label>
     </div>
   );
 };
