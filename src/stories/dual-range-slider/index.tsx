@@ -12,8 +12,10 @@ export const DualRangeInput: Component<Props> = (props) => {
   const defaultProps = { min: 0, max: 100 };
   const p = mergeProps(defaultProps, props);
   const [local, rest] = splitProps(p, ["ref", "min", "max", "value", "name"]);
-  const [fromVal, setFromVal] = createSignal(local.value?.[0] ?? 0);
-  const [toVal, setToVal] = createSignal(local.value?.[1] ?? 0);
+
+  // Treat these as independent Slider A and Slider B
+  const [valA, setValA] = createSignal(local.value?.[0] ?? 0);
+  const [valB, setValB] = createSignal(local.value?.[1] ?? 0);
 
   let inputRef: HTMLInputElement | undefined;
   let fromSliderRef: HTMLInputElement | undefined;
@@ -28,18 +30,14 @@ export const DualRangeInput: Component<Props> = (props) => {
       const val = inputRef.defaultValue.split(",").map((x) => Number.parseFloat(x)) as [number, number];
 
       if (fromSliderRef && toSliderRef) {
-        setFromVal(val[0]);
-        setToVal(val[1]);
-
+        setValA(val[0]);
+        setValB(val[1]);
         fromSliderRef.value = val[0].toString();
         toSliderRef.value = val[1].toString();
       }
-    }
-
-    if (fromSliderRef && toSliderRef && local.value) {
-      setFromVal(local.value[0]);
-      setToVal(local.value[1]);
-
+    } else if (fromSliderRef && toSliderRef && local.value) {
+      setValA(local.value[0]);
+      setValB(local.value[1]);
       fromSliderRef.value = local.value[0].toString();
       toSliderRef.value = local.value[1].toString();
     }
@@ -49,15 +47,14 @@ export const DualRangeInput: Component<Props> = (props) => {
     if (form) {
       form.addEventListener("reset", () => {
         if (local.value) {
-          setFromVal(local.value[0]);
-          setToVal(local.value[1]);
+          setValA(local.value[0]);
+          setValB(local.value[1]);
         }
 
         if (inputRef) {
           const val = inputRef.defaultValue.split(",").map((x) => Number.parseFloat(x)) as [number, number];
-
-          setFromVal(val[0]);
-          setToVal(val[1]);
+          setValA(val[0]);
+          setValB(val[1]);
 
           if (fromSliderRef && toSliderRef) {
             fromSliderRef.defaultValue = val[0].toString();
@@ -69,19 +66,18 @@ export const DualRangeInput: Component<Props> = (props) => {
   });
 
   const handleFromInput: JSX.InputEventHandlerUnion<HTMLInputElement, InputEvent> = (e) => {
-    const value = Math.min(+e.target.value, toVal() - 1);
-    setFromVal(value);
-    e.target.value = value.toString();
+    setValA(+e.target.value);
   };
 
   const handleToInput: JSX.InputEventHandlerUnion<HTMLInputElement, InputEvent> = (e) => {
-    const value = Math.max(+e.target.value, fromVal() + 1);
-    setToVal(value);
-    e.target.value = value.toString();
+    setValB(+e.target.value);
   };
 
-  const fromPercent = createMemo(() => (fromVal() / local.max) * 100);
-  const toPercent = createMemo(() => (toVal() / local.max) * 100);
+  const actualFrom = createMemo(() => Math.min(valA(), valB()));
+  const actualTo = createMemo(() => Math.max(valA(), valB()));
+
+  const fromPercent = createMemo(() => (actualFrom() / local.max) * 100);
+  const toPercent = createMemo(() => (actualTo() / local.max) * 100);
 
   return (
     <div
@@ -112,7 +108,7 @@ export const DualRangeInput: Component<Props> = (props) => {
       <input
         type="text"
         aria-hidden="true"
-        value={`${fromVal()},${toVal()}`}
+        value={`${actualFrom()},${actualTo()}`}
         style={{ display: "none" }}
         data-type="range-array"
         name={local.name}
@@ -123,7 +119,6 @@ export const DualRangeInput: Component<Props> = (props) => {
           } else {
             local.ref = node;
           }
-
           inputRef = node;
         }}
       />
