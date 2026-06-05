@@ -4,7 +4,7 @@ import { Toggle } from ".";
 
 const ExampleStory = () => {
   return (
-    <form style={{ display: "flex", gap: "0.5em" }}>
+    <form style={{ display: "flex", gap: "0.5em", "align-items": "center" }}>
       <Toggle name="name" id="input-example" />
       <Label for="input-example">Enabled</Label>
     </form>
