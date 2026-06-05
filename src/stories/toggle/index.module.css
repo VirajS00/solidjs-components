@@ -1,58 +1,66 @@
 .checkContainer {
-	position: relative;
+  position: relative;
 }
 
 .checkInput {
-	position: absolute;
-	scale: 0;
+  position: absolute;
+  scale: 0;
 }
 
 .switchLabel {
-	display: inline-flex;
-	align-items: center;
-	border: 1px solid #d9d9d9;
-	border-radius: 100vh;
-	cursor: pointer;
-	background-color: #ededed;
-	height: 1.25em;
-	width: 2.25em;
-	transition: background-color 75ms ease, box-shadow 75ms ease;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #d9d9d9;
+  border-radius: 100vh;
+  cursor: pointer;
+  background-color: #ededed;
+  height: 1.25em;
+  width: 2.25em;
+  transition:
+    background-color 75ms ease,
+    box-shadow 75ms ease;
 }
 
 @media (prefers-reduced-motion) {
-	.switchLabel {
-		transition: none;
-	}
+  .switchLabel {
+    transition: none;
+  }
 }
 
 .switchIndicator {
-	display: block;
-	height: 0.9em;
-	width: 0.9em;
-	background-color: #fff;
-	border-radius: 50%;
-	transform: translateX(0.1em);
-	box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
-	transition: transform 100ms ease, background-color 100ms ease;
+  display: block;
+  height: 0.9em;
+  width: 0.9em;
+  background-color: #fff;
+  border-radius: 50%;
+  transform: translateX(0.1em);
+  box-shadow:
+    0 1px 3px 0 rgb(0 0 0 / 0.3),
+    0 1px 2px -1px rgb(0 0 0 / 0.3);
+  transition:
+    transform 100ms ease,
+    background-color 100ms ease;
 }
 
 @media (prefers-reduced-motion) {
-	.switchIndicator {
-		transition: none;
-	}
+  .switchIndicator {
+    transition: none;
+  }
 }
 
 .checkInput:focus-visible + .switchLabel {
-	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3795fa;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #3795fa;
 }
 
 .checkInput:checked {
-	& + .switchLabel {
-		background-color: #3795fa;
-		border-color: #9acbff;
-	}
+  & + .switchLabel {
+    background-color: #3795fa;
+    border-color: #9acbff;
+  }
 
-	& + .switchLabel .switchIndicator {
-		transform: translateX(calc(100% + 0.2em));
-	}
+  & + .switchLabel .switchIndicator {
+    transform: translateX(calc(100% + 0.2em));
+  }
 }

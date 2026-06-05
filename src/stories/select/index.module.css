@@ -1,111 +1,114 @@
 .containerDiv {
-	position: relative;
+  position: relative;
 }
 
 .triggerButton {
-	position: relative;
-	width: 100%;
-	padding-block: 0.5rem;
-	padding-inline-start: 0.75rem;
-	padding-inline-end: 2.5rem;
-	height: 2.25rem;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	text-align: left;
-	border-radius: 0.5rem;
-	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-	cursor: default;
-	outline: none;
-	font-size: 1rem;
-	transition: box-shadow 75ms ease;
+  position: relative;
+  width: 100%;
+  padding-block: 0.5rem;
+  padding-inline-start: 0.75rem;
+  padding-inline-end: 2.5rem;
+  height: 2.25rem;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  text-align: left;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  cursor: default;
+  outline: none;
+  font-size: 1rem;
+  transition: box-shadow 75ms ease;
 }
 
 .triggerButton:focus-visible {
-	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3795fa;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #3795fa;
 }
 
 @media (prefers-reduced-motion) {
-	.triggerButton {
-		transition: none;
-	}
+  .triggerButton {
+    transition: none;
+  }
 }
 
 .triggerButton[aria-expanded="false"] svg {
-	transform: rotate(0deg);
+  transform: rotate(0deg);
 }
 
 .triggerButton[aria-expanded="true"] svg {
-	transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .transitionEnter {
-	transition: opacity 75ms ease-in, scale 75ms ease-in;
-	transform-origin: top left;
+  transition:
+    opacity 75ms ease-in,
+    scale 75ms ease-in;
+  transform-origin: top left;
 }
 
 .transitionEnterFrom {
-	opacity: 0;
-	scale: 0.95;
+  opacity: 0;
+  scale: 0.95;
 }
 
 .transitionEnterTo {
-	opacity: 1;
-	scale: 1;
+  opacity: 1;
+  scale: 1;
 }
 
 .listboxOptions {
-	position: absolute;
-	width: 100%;
-	padding-block: 0.25rem;
-	padding-inline-start: 0;
-	margin-top: 0.25rem;
-	overflow: auto;
-	font-size: 1rem;
-	background-color: white;
-	border-radius: 0.375rem;
-	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-	max-height: 15rem;
-	outline: none;
-	border: 1px solid #ccc;
-	list-style: none;
-	z-index: 10001;
+  position: absolute;
+  width: 100%;
+  padding-block: 0.25rem;
+  padding-inline-start: 0;
+  margin-top: 0.25rem;
+  overflow: auto;
+  font-size: 1rem;
+  background-color: white;
+  border-radius: 0.375rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  max-height: 15rem;
+  outline: none;
+  border: 1px solid #ccc;
+  list-style: none;
+  z-index: 10001;
 }
 
 .triggerIconContainer {
-	position: absolute;
-	display: flex;
-	align-items: center;
-	top: 50%;
-	right: 0.75rem;
-	transform: translateY(-50%);
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
 }
 
 .listboxItem {
-	padding-block: 0.5rem;
-	cursor: default;
-	user-select: none;
-	position: relative;
-	padding-block: 0.5rem;
-	padding-inline: 1rem;
-	display: flex;
-	align-items: center;
-	outline: none;
-	justify-content: space-between;
+  cursor: default;
+  user-select: none;
+  position: relative;
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+  display: flex;
+  align-items: center;
+  outline: none;
+  justify-content: space-between;
 }
 
 .listboxItem:focus {
-	background-color: rgba(232, 243, 255, 0.713);
-	color: #2e79c8;
+  background-color: rgba(232, 243, 255, 0.713);
+  color: #2e79c8;
 }
 
 .listboxItem[aria-selected="true"]:focus {
-	color: #2e79c8;
+  color: #2e79c8;
 }
 
 .listboxItem[aria-selected="true"] {
-	color: #3795fa;
+  color: #3795fa;
 }
 
 .placeholder {
-	color: #949494;
+  color: #949494;
 }

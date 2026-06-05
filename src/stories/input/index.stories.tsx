@@ -1,27 +1,26 @@
-import type { Meta, StoryObj } from "storybook-solidjs";
+import type { Meta, StoryObj } from "storybook-solidjs-vite";
 
 import { Input } from ".";
 
 const ExampleStory = () => {
-	return (
-		<form
-			style={{ display: "flex", "flex-direction": "column", gap: "0.25em" }}>
-			<label for='input-example'>Name</label>
-			<Input name='name' id='input-example' placeholder='Enter Name' />
-		</form>
-	);
+  return (
+    <form style={{ display: "flex", "flex-direction": "column", gap: "0.25em" }}>
+      <label for="input-example">Name</label>
+      <Input name="name" id="input-example" placeholder="Enter Name" />
+    </form>
+  );
 };
 
 const meta = {
-	title: "Example/Input",
-	component: ExampleStory,
-	argTypes: {},
-	args: {},
+  title: "Example/Input",
+  component: ExampleStory,
+  argTypes: {},
+  args: {},
 } satisfies Meta<typeof ExampleStory>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-	args: {},
+  args: {},
 };

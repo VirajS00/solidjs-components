@@ -1,24 +1,26 @@
 .input {
-	border: 1px solid #ccc;
-	border-radius: 0.5rem;
-	font: inherit;
-	padding-inline: 0.5em;
-	height: 2.25em;
-	outline: none;
-	font-size: 1em;
-	transition: box-shadow 75ms ease;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font: inherit;
+  padding-inline: 0.5em;
+  height: 2.25em;
+  outline: none;
+  font-size: 1em;
+  transition: box-shadow 75ms ease;
 }
 
 input::placeholder {
-	color: #949494;
+  color: #949494;
 }
 
 @media (prefers-reduced-motion) {
-	.input {
-		transition: none;
-	}
+  .input {
+    transition: none;
+  }
 }
 
 .input:focus {
-	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3795fa;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #3795fa;
 }

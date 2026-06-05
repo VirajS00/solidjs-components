@@ -1,60 +1,62 @@
 .input {
-	background-color: transparent;
-	border: none;
-	font: inherit;
-	font-family: inherit;
-	outline: none;
-	padding-block: 0.5rem;
-	flex: 1;
-	min-width: 0;
+  background-color: transparent;
+  border: none;
+  font: inherit;
+  font-family: inherit;
+  outline: none;
+  padding-block: 0.5rem;
+  flex: 1;
+  min-width: 0;
 }
 
 .input::placeholder {
-	color: #949494;
+  color: #949494;
 }
 
 .container {
-	border: 1px solid #ccc;
-	border-radius: 0.5rem;
-	padding-inline: 0.5em;
-	display: flex;
-	gap: 0.5rem;
-	height: 2.25em;
-	flex-wrap: wrap;
-	align-items: center;
-	transition: box-shadow 75ms ease;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding-inline: 0.5em;
+  display: flex;
+  gap: 0.5rem;
+  height: 2.25em;
+  flex-wrap: wrap;
+  align-items: center;
+  transition: box-shadow 75ms ease;
 }
 
 @media (prefers-reduced-motion) {
-	.container {
-		transition: none;
-	}
+  .container {
+    transition: none;
+  }
 }
 
 .container:has(input:focus) {
-	box-shadow: 0 0 0 2px #fff, 0 0 0 4px #3795fa;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px #3795fa;
 }
 
 .tag {
-	padding-inline: 0.5em;
-	padding-block: 0.25em;
-	background-color: #ffffff;
-	border: 1px solid #ccc;
-	font-size: 0.875rem;
-	border-radius: 0.25em;
-	display: inline-flex;
-	align-items: center;
-	gap: 0.375em;
+  padding-inline: 0.5em;
+  padding-block: 0.25em;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  font-size: 0.875rem;
+  border-radius: 0.25em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375em;
 }
 
 .removeButton {
-	appearance: none;
-	border: 0;
-	margin: 0;
-	padding: 0;
-	background-color: transparent;
-	cursor: pointer;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
